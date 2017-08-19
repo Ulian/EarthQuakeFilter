@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 
 import EarthQuakeDetails from './EarthQuakeDetails';
 import InputGroup from './InputGroup';
+import Alert from './Alert.js';
 
 import EarthQuakeService from './EarthQuakeService';
 
 class App extends Component {
   constructor() {
     super();
-    this.date = new Date();
+    const date = new Date();
 
     this.state = {
       earthquakes: null,
-      startTime: `${this.date.getFullYear()}-${('0' + (this.date.getMonth() + 1)).slice(-2)}-${('0' + (this.date.getDate() - 1)).slice(-2)}`,
-      endTime: `${this.date.getFullYear()}-${('0' + (this.date.getMonth() + 1)).slice(-2)}-${('0' + this.date.getDate()).slice(-2)}`,
+      startTime: `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + (date.getDate() - 1)).slice(-2)}`,
+      endTime: `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`,
       minMag: 3
     };
 
@@ -21,24 +22,28 @@ class App extends Component {
   }
 
   componentWillMount() {
-    EarthQuakeService.getEarthQuakes(this.state.startTime, this.state.endTime, this.state.minMag);
+    const { startTime, endTime, minMag } = this.state;
+
+    EarthQuakeService.getEarthQuakes(startTime, endTime, minMag)
+      .then(response => this.setState({ earthquakes: response}));
   }
 
   onChange(event) {
+    const { startTime, endTime, minMag } = this.state;
+
     switch(event.target.id) {
       case 'minMagnitude':
-        this.setState({ minMag: event.target.value }, () => EarthQuakeService.getEarthQuakes(this.state.startTime, this.state.endTime, this.state.minMag));
+        this.setState({ minMag: event.target.value }, () => EarthQuakeService.getEarthQuakes(startTime, endTime, this.state.minMag).then(response => this.setState({ earthquakes: response })));
         break;
       case 'startTime':
-        this.setState({ startTime: event.target.value}, () => EarthQuakeService.getEarthQuakes(this.state.startTime, this.state.endTime, this.state.minMag));
+        this.setState({ startTime: event.target.value}, () => EarthQuakeService.getEarthQuakes(this.state.startTime, endTime, minMag).then(response => this.setState({ earthquakes: response })));
         break;
       case 'endTime':
-        this.setState({ endTime: event.target.value}, () => EarthQuakeService.getEarthQuakes(this.state.startTime, this.state.endTime, this.state.minMag));
+        this.setState({ endTime: event.target.value}, () => EarthQuakeService.getEarthQuakes(startTime, this.state.endTime, minMag).then(response => this.setState({ earthquakes: response })));
         break;
       default:
         break;
     }
-    console.log(event.target.value)
   }
 
   render() {
@@ -60,7 +65,7 @@ class App extends Component {
         <form className="form-row">
           <InputGroup
             id="minMagnitude"
-            name={ 'Magnitude ' + parseFloat(this.state.minMag).toFixed(1) }
+            name={ `Magnitude ${parseFloat(this.state.minMag).toFixed(1)}` }
             type="range"
             value={ this.state.minMag.toString() }
             min="0.1"
@@ -85,7 +90,7 @@ class App extends Component {
         </form>
         <br/>
 
-        { earthquakes.length > 0 ? earthquakes : <div className="alert alert-warning" role="alert">Sin datos con esos filtros.</div> }
+        { earthquakes.length > 0 ? earthquakes : <Alert type="warning" message="Sin datos con esos filtros." /> }
       </div>
     );
   }
