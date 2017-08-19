@@ -59,34 +59,35 @@ class App extends Component {
               />
     }) : 'Loading...';
 
+    const inputGroups = [{
+        id: 'minMagnitude',
+        name: `Magnitude ${parseFloat(this.state.minMag).toFixed(1)}`,
+        type: 'range',
+        value: this.state.minMag.toString(),
+        min: '0.1',
+        max: '10.0',
+        step: '0.1',
+        onChange: this.onChange
+      }, {
+        id: 'startTime',
+        name: 'Fecha Inicio',
+        type: 'date',
+        value: this.state.startTime,
+        onChange: this.onChange
+      }, {
+        id: 'endTime',
+        name: 'Fecha Fin',
+        type: 'date',
+        value: this.state.endTime,
+        onChange: this.onChange
+      }
+    ].map(props => <InputGroup key={ props.id } { ...props } />);
+
     return (
       <div className="container">
         <br/>
         <form className="form-row">
-          <InputGroup
-            id="minMagnitude"
-            name={ `Magnitude ${parseFloat(this.state.minMag).toFixed(1)}` }
-            type="range"
-            value={ this.state.minMag.toString() }
-            min="0.1"
-            max="10.0"
-            step="0.1"
-            onChange={ this.onChange }
-          />
-
-          <InputGroup
-            id="startTime"
-            name="Fecha Inicio" type="date"
-            value={ this.state.startTime }
-            onChange={ this.onChange }
-          />
-
-          <InputGroup
-            id="endTime"
-            name="Fecha Fin" type="date"
-            value={ this.state.endTime }
-            onChange={ this.onChange }
-          />
+          { inputGroups }
         </form>
         <br/>
 
