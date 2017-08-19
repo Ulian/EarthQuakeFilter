@@ -1,52 +1,49 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import EarthQuake from './EarthQuake'
+
+import EarthQuakeDetails from './EarthQuakeDetails';
+import InputGroup from './InputGroup';
+
+import EarthQuakeService from './EarthQuakeService';
 
 class App extends Component {
-
   constructor() {
     super();
+    this.date = new Date();
+
     this.state = {
       earthquakes: null,
-      startTime: "2017-08-16",
-      endTime: "2017-08-17",
+      startTime: `${this.date.getFullYear()}-${('0' + (this.date.getMonth() + 1)).slice(-2)}-${('0' + (this.date.getDate() - 1)).slice(-2)}`,
+      endTime: `${this.date.getFullYear()}-${('0' + (this.date.getMonth() + 1)).slice(-2)}-${('0' + this.date.getDate()).slice(-2)}`,
       minMag: 3
     };
 
     this.onChange = this.onChange.bind(this);
   }
 
-  getEarthQuakes() {
-    axios.get(`https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${this.state.startTime}&endtime=${this.state.endTime}&minmagnitude=${this.state.minMag}`)
-      .then(response => {
-        this.setState({earthquakes: response.data.features});
-      });
-  }
-
   componentWillMount() {
-    this.getEarthQuakes()
+    EarthQuakeService.getEarthQuakes(this.state.startTime, this.state.endTime, this.state.minMag);
   }
 
-  onChange(event, id) {
+  onChange(event) {
     switch(event.target.id) {
       case 'minMagnitude':
-        this.setState({ minMag: event.target.value }, () => this.getEarthQuakes());
+        this.setState({ minMag: event.target.value }, () => EarthQuakeService.getEarthQuakes(this.state.startTime, this.state.endTime, this.state.minMag));
         break;
       case 'startTime':
-        this.setState({ startTime: event.target.value}, () => this.getEarthQuakes());
+        this.setState({ startTime: event.target.value}, () => EarthQuakeService.getEarthQuakes(this.state.startTime, this.state.endTime, this.state.minMag));
         break;
       case 'endTime':
-        this.setState({ endTime: event.target.value}, () => this.getEarthQuakes());
+        this.setState({ endTime: event.target.value}, () => EarthQuakeService.getEarthQuakes(this.state.startTime, this.state.endTime, this.state.minMag));
         break;
       default:
         break;
     }
+    console.log(event.target.value)
   }
 
   render() {
-
     const earthquakes = (this.state.earthquakes) ? this.state.earthquakes.map((element) => {
-      return <EarthQuake
+      return <EarthQuakeDetails
                 key={ element.properties.code }
                 mag={ element.properties.mag }
                 place={ element.properties.place }
@@ -61,20 +58,30 @@ class App extends Component {
       <div className="container">
         <br/>
         <form className="form-row">
-          <div className="input-group col">
-            <span className="input-group-addon">Magnitude { parseFloat(this.state.minMag).toFixed(1) }</span>
-            <input type="range" className="form-control" id="minMagnitude" defaultValue={ this.state.minMag } min="0.1" max="10.0" step="0.1" onChange={ this.onChange }/>
-          </div>
+          <InputGroup
+            id="minMagnitude"
+            name={ 'Magnitude ' + parseFloat(this.state.minMag).toFixed(1) }
+            type="range"
+            value={ this.state.minMag.toString() }
+            min="0.1"
+            max="10.0"
+            step="0.1"
+            onChange={ this.onChange }
+          />
 
-          <div className="input-group col">
-            <span className="input-group-addon">Fecha Inicio</span>
-            <input type="date" className="form-control" id="startTime" defaultValue={ this.state.startTime } onChange={ this.onChange }/>
-          </div>
+          <InputGroup
+            id="startTime"
+            name="Fecha Inicio" type="date"
+            value={ this.state.startTime }
+            onChange={ this.onChange }
+          />
 
-          <div className="input-group col">
-            <span className="input-group-addon">Fecha Inicio</span>
-            <input type="date" className="form-control" id="endTime" defaultValue={ this.state.endTime } onChange={ this.onChange }/>
-          </div>
+          <InputGroup
+            id="endTime"
+            name="Fecha Fin" type="date"
+            value={ this.state.endTime }
+            onChange={ this.onChange }
+          />
         </form>
         <br/>
 
