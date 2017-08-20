@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import PropTypes from 'prop-types';
 
-class EarthQuakeDetails extends Component {
+export class EarthQuakeDetails extends Component {
   render() {
     const { mag, place, time, url, latitude, longitude } = this.props;
 
@@ -26,6 +26,6 @@ EarthQuakeDetails.propTypes = {
   url: PropTypes.string.isRequired,
   latitude: PropTypes.number.isRequired,
   longitude: PropTypes.number.isRequired,
-}
+};
 
 export default EarthQuakeDetails;

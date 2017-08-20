@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Alert extends Component {
+export class Alert extends Component {
   render() {
     return(
-      <div className={ `alert alert-${this.props.type}` } role="alert">{ this.props.message }</div>
+      <div className={ `alert alert-${this.props.type}  mt-3` } role="alert">{ this.props.message }</div>
     )
   }
 }
@@ -12,6 +12,6 @@ class Alert extends Component {
 Alert.propTypes = {
   type: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired
-}
+};
 
 export default Alert;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-class InputGroup extends Component {
+export class InputGroup extends Component {
   render() {
     const { id, type, value, name, onChange } = this.props;
     let optionalProps = {}
@@ -15,6 +15,7 @@ class InputGroup extends Component {
         step
       }
     }
+    
     return(
       <div className="input-group col">
         <span className="input-group-addon">{ name }</span>

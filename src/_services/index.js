@@ -1,0 +1,1 @@
+export { EarthQuakeService } from './EarthQuakeService';
