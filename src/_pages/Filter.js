@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Alert, EarthQuakeDetails, InputGroup } from '../_components/index';
+import { InputGroup, EarthQuakeList, Alert } from '../_components/index';
 import { EarthQuakeService } from '../_services/index';
 
 export class Filter extends Component {
@@ -10,7 +10,7 @@ export class Filter extends Component {
     const date = new Date();
 
     this.state = {
-      earthQuakeList: null,
+      earthQuakeList: [],
       startTime: `${ date.getFullYear() }-${ ('0' + (date.getMonth() + 1)).slice(-2) }-${ ('0' + (date.getDate() - 1)).slice(-2) }`,
       endTime: `${ date.getFullYear() }-${ ('0' + (date.getMonth() + 1)).slice(-2) }-${ ('0' + date.getDate()).slice(-2) }`,
       minMagnitude: 3.0,
@@ -50,20 +50,7 @@ export class Filter extends Component {
   }
 
   render() {
-    const earthQuakeList = (this.state.earthQuakeList) ? this.state.earthQuakeList.map((element) => {
-      const { code, mag, place, time, url } = element.properties;
-      const { coordinates } = element.geometry;
-
-      return <EarthQuakeDetails
-                key={ code }
-                mag={ mag }
-                place={ place }
-                time={ time }
-                url={ url }
-                latitude={ coordinates[0] }
-                longitude={ coordinates[1] }
-              />
-    }) : <Alert type="info" message="Loading..." />;
+    const earthQuakeList = <EarthQuakeList data={ this.state.earthQuakeList } />
 
     const inputGroups = [{
         id: 'minMagnitude',
@@ -100,7 +87,7 @@ export class Filter extends Component {
         <form className="form-inline my-3">
           { inputGroups }
         </form>
-        { earthQuakeList.length > 0 ? earthQuakeList : <Alert type="warning" message="No results with the current filters..." /> }
+        { earthQuakeList.props.data.length > 0 ? earthQuakeList : <Alert type="warning" message="No results with the current filters..." /> }
       </div>
     )
   };
