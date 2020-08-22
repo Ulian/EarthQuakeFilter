@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { InputGroup, EarthQuakeList } from '../index';
+import { InputGroup } from '../index';
 import Alert from "../ui/Alert";
+import EarthQuakeList from "../ui/EarthQuakeList";
 import { EarthQuakeService } from '../../services';
 
 const Filter = () => {
