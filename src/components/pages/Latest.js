@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { EarthQuakeList } from '../components/index';
-import { EarthQuakeService } from '../services/index';
+import { EarthQuakeList } from '../index';
+import { EarthQuakeService } from '../../services';
 
 const Latest = () => {
   const [ earthQuakeList, setEarthQuakeList ] = React.useState([]);

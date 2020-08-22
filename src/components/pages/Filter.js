@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { InputGroup, EarthQuakeList } from '../components/index';
-import Alert from "../components/ui/Alert";
-import { EarthQuakeService } from '../services/index';
+import { InputGroup, EarthQuakeList } from '../index';
+import Alert from "../ui/Alert";
+import { EarthQuakeService } from '../../services';
 
 const Filter = () => {
   const date = new Date();

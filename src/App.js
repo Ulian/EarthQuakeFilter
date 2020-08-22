@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { NavigationBar } from './components/index';
-import Latest from "./pages/Latest";
-import Filter from "./pages/Filter";
+import Latest from "./components/pages/Latest";
+import Filter from "./components/pages/Filter";
 
 class App extends Component {
   render() {
