@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { InputGroup, EarthQuakeList, Alert } from '../_components/index';
-import { EarthQuakeService } from '../_services/index';
+import { InputGroup, EarthQuakeList, Alert } from '../components/index';
+import { EarthQuakeService } from '../services/index';
 
 export class Filter extends Component {
   constructor() {

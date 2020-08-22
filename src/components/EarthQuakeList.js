@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { EarthQuakeDetails, Alert } from '../_components/index';
+import { EarthQuakeDetails, Alert } from './/index';
 
 export class EarthQuakeList extends Component {
   render() {

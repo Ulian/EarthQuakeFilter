@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import { EarthQuakeList } from '../_components/index';
-import { EarthQuakeService } from '../_services/index';
+import { EarthQuakeList } from '../components/index';
+import { EarthQuakeService } from '../services/index';
 
-export class Lastests extends Component {
+export class Latest extends Component {
   constructor() {
     super();
 
@@ -29,4 +29,4 @@ export class Lastests extends Component {
   };
 }
 
-export default Lastests;
+export default Latest;
