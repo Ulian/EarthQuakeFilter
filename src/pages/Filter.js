@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { InputGroup, EarthQuakeList, Alert } from '../components/index';
+import { InputGroup, EarthQuakeList } from '../components/index';
+import Alert from "../components/ui/Alert";
 import { EarthQuakeService } from '../services/index';
 
 export class Filter extends Component {
@@ -87,7 +88,7 @@ export class Filter extends Component {
         <form className="form-inline my-3">
           { inputGroups }
         </form>
-        { earthQuakeList.props.data.length > 0 ? earthQuakeList : <Alert type="warning" message="No results with the current filters..." /> }
+        { earthQuakeList.props.data.length > 0 ? earthQuakeList : <Alert type="warning">No results with the current filters...</Alert> }
       </div>
     )
   };

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { EarthQuakeDetails, Alert } from './/index';
+import { EarthQuakeDetails } from './index';
+import Alert from "./ui/Alert";
 
 export class EarthQuakeList extends Component {
   render() {
@@ -18,7 +19,7 @@ export class EarthQuakeList extends Component {
                 latitude={ coordinates[0] }
                 longitude={ coordinates[1] }
               />
-    }) : <Alert type="info" message="Loading..." />;
+    }) : <Alert type="info">Loading...</Alert>;
 
     return(
       <div>
