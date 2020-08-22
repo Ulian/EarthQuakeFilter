@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { InputGroup } from '../index';
+import InputGroup from "../ui/InputGroup";
 import Alert from "../ui/Alert";
 import EarthQuakeList from "../ui/EarthQuakeList";
 import { EarthQuakeService } from '../../services';
