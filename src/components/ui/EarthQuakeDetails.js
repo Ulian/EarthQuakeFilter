@@ -1,11 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import PropTypes from 'prop-types';
 
-export class EarthQuakeDetails extends Component {
-  render() {
-    const { mag, place, time, url, latitude, longitude } = this.props;
-
+const EarthQuakeDetails = ({ mag, place, time, url, latitude, longitude }) => {
     return(
       <div className="row">
         <div className="col">Magnitud: { mag }</div>
@@ -16,7 +13,6 @@ export class EarthQuakeDetails extends Component {
         <div className="col">Longitud: { longitude }</div>
       </div>
     );
-  }
 }
 
 EarthQuakeDetails.propTypes = {

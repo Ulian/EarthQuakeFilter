@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { EarthQuakeDetails } from '../index';
+import EarthQuakeDetails from "./EarthQuakeDetails";
 import Alert from "./Alert";
 
 const EarthQuakeList = ({ data }) => {
