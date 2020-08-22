@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { NavigationBar } from './components/index';
-import { Latest } from './pages/index';
+import Latest from "./pages/Latest";
 import Filter from "./pages/Filter";
 
 class App extends Component {
