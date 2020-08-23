@@ -17,6 +17,8 @@ const Filter = () => {
   React.useEffect(() => {
     EarthQuakeService.getEarthQuakes({ startTime, endTime, minMagnitude, limit })
         .then(response => setEarthQuakeList(response));
+
+    return () => EarthQuakeService.cancelToken();
   }, [ minMagnitude, startTime, endTime, limit ]);
 
   const inputGroups = [{

@@ -8,7 +8,7 @@ const EarthQuakeDetails = ({ mag, place, time, url, latitude, longitude }) => {
         <div className="col">Magnitud: { mag }</div>
         <div className="col">{ place }</div>
         <div className="col"> { new Date(time).toUTCString() }</div>
-        <div className="col"><a href={ url }>Detalles</a></div>
+        <div className="col"><a href={ url } target="_blank">Detalles</a></div>
         <div className="col">Latitud { latitude }</div>
         <div className="col">Longitud: { longitude }</div>
       </div>
